@@ -94,3 +94,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['update'])) {
     $stmt->close();
     header("Location: /memberreg/memberreg.php");
 }
+
