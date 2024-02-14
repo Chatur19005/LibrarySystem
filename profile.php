@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$conn->close();
+
 ?>
 
 
@@ -81,43 +81,201 @@ $conn->close();
     <title>Profile</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom, #000080, #1E90FF); /* Gradient from navy blue to light blue */
+    color: #fff;
+    padding: 25px;
+}
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            color: #ffc107;
+        }
+        .content-area {
+            padding: 0px;
+        }
+        body {
+            padding-top: 0px; /* Ensure content doesn't get hidden behind the navbar */
+        }
+        .navbar a, .navbar span {
+            color: #fff !important; /* White text for better contrast */
+        }
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+    }
+    .alert.success { background-color: #4CAF50; }
+        .alert.error { background-color: #f44336; }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            padding: 15px;
+
+        }
+
+        .updateBtn {
+            background-color: rgb(28, 93, 7);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            display: inline;
+            padding: 10px;
+        }
+        .deleteBtn {
+            background-color: rgb(237, 2, 2);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            display: inline;
+            padding: 10px;
+        }
+        <style>
+        .nav-link img {
+            max-width: 10px;
+            height: auto;
+        }
+        @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    </style>
+    </style>
 </head>
 <body>
 
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-        <div class="container-fluid">
-            <span class="navbar-brand">Library Management System</span>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-lg-2 sidebar">
+                <!-- Sidebar links -->
+                <h5 style="text-align: center;">Library Management System</h5>
 
-            <div class="btn-group" role="group" aria-label="Navigation Links">
-                <a href="admin.php" class="btn btn-light">Home</a>
-                <a href="books_registration.php" class="btn btn-light">Books Registration</a>
-                <a href="category_registration.php" class="btn btn-light">Category Registration</a>
-                <a href="member_registration.php" class="btn btn-light">Member Registration</a>
-                <a href="borrow_details.php" class="btn btn-light">Borrow Details</a>
+                <ul class="nav flex-column">
+                    <li class="nav-item" style="text-align: center;">
+                        <a href="admin.php" class="nav-link"><img src="university-of-kelaniya-logo.png" alt="Home" style="max-width: 100px; height: auto; animation: rotate 15s linear infinite;"></a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="../admin.php" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../bookregister/bookreg.php" class="nav-link">Books Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../bookcata/bookcatagory.php" class="nav-link">Category Registration</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="../memberreg/memberreg.php" class="nav-link">Member Registration</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="../bookb/book_borrow.php" class="nav-link">Borrow Details</a>
+                    </li>
+                </ul>
             </div>
 
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <span class="navbar-text">
-                        Welcome, <?php echo $userData['first_name']; ?>!
-                    </span>
-                </li>
-                <li class="nav-item">
-                    &nbsp; <!-- Add an empty list item for spacing -->
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-primary" href="profile.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                    &nbsp; <!-- Add an empty list item for spacing -->
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger" data-bs-toggle="modal" href="#logoutConfirmationModal">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+        <div class="col-md-9 col-lg-10 content-area">
+        <!-- Main content -->
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-black">
+            <div class="container-fluid">
+                <!-- Place for brand/logo or additional links -->
+        
+                <!-- This div will align its content to the right -->
+                <div class="ms-auto">
+                    <a href="profile.php" class="btn btn-primary ms-2">Profile</a>
+                    <a href="#logoutConfirmationModal" class="btn btn-outline-danger ms-2" data-bs-toggle="modal">Logout</a>
+                </div>
+            </div>
+        </nav>
 
     <!-- Profile information -->
     <div class="container mt-5 pt-3">
